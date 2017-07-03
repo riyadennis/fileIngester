@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def ingestFile(self):
         file = open('data/products.csv', 'r')
-        reader = csv.reader(file)
+        reader = csv.DictReader(file)
         for row in reader:
             print row
         file.close()
