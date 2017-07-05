@@ -1,5 +1,7 @@
 from django.core.management.base import BaseCommand
+from database_schema.models import  Product
 import csv
+
 
 class Command(BaseCommand):
     args = 'Arguments is not needed'
@@ -13,5 +15,10 @@ class Command(BaseCommand):
         file = open('data/products.csv', 'r')
         reader = csv.DictReader(file)
         for row in reader:
-            print row
+            product = Product()
+            product.description = row['description']
+            product.sku = row['sku']
+            product.store_id = row['store_id']
+            product.is_promotion = row['is_promotion']
+            product.save()
         file.close()
